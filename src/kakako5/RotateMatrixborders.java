@@ -5,36 +5,47 @@ public class RotateMatrixborders {
 	public static void main(String[] args) {
 		// https://programmers.co.kr/learn/courses/30/lessons/77485
 		
-		int row = 8;
-		int columns = 8; 
-		int[][] queries = {{1,1,5,4}, {2,4,5,6}};
+		int row = 3;
+		int columns = 3; 
+		int[][] queries = {{1,1,2,2}, {1,2,2,3},{2,1,3,2},{2,2,3,3}};
 		int[][] mat = creatMatrix(row, columns);	
-		rotateMatrix(mat, 1,1,8,8);		
+		int[] result = new int[queries.length];
+		for(int i = 0 ; i < queries.length ; i ++ ) {
+			result[i] = rotateMatrix(mat, queries[i][0], queries[i][1], queries[i][2], queries[i][3]);
+		}
+
+		for(int i = 0 ; i < result.length ; i ++) {
+			System.out.print(result[i] + ",");
+		}
+		
 	}
 	
-	public static void rotateMatrix(int[][] mat, int x1, int y1, int x2, int y2){
+	public static int rotateMatrix(int[][] mat, int x1, int y1, int x2, int y2){
 		
 		int[][] tempMat = mat;
 		int temp = tempMat[x1][y1];
+		int min = temp;
 		int temp2;
-		System.out.println( x1 + " " + y1 + " " + x2 + " " + y2);
 		for(int i = x1 ; i < x2 ; i ++ ) {
 			tempMat[i][y1] = tempMat[i + 1][y1];
+			min = Math.min(min, tempMat[i][y1]);
 		}
 		for(int i = y1 ; i < y2 ; i ++) {
 			tempMat[x2][i] = tempMat[x2][i + 1];
+			min = Math.min(min, tempMat[x2][i]);
 		}
 		for(int i = x2 ; i > x1 ; i -- ) {
 			tempMat[i][y2] = tempMat[i - 1][y2];
+			min = Math.min(min, tempMat[i][y2]);
 		}
 		for(int i = y1 ;  i < y2 ; i++ ) {
 			
 			temp2 = tempMat[x1][i + 1]; 
 			tempMat[x1][i + 1] = temp;
-			temp = temp2;
-			printMatrix(tempMat);
-			 
+			temp = temp2;			 
+			min = Math.min(min, tempMat[x1][i + 1]);
 		}
+		return min;
 	}
 
 	public static int[][] creatMatrix (int row, int columns){
