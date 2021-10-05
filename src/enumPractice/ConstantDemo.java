@@ -2,7 +2,7 @@ package enumPractice;
 
 enum Fruit{
 	APPLE, PEACH, BANANA;
-	Fruit(){ // enum은  생선자를  가질수 있으나 private만을 허용험.
+	private Fruit(){ // enum은  생선자를  가질수 있으나 private만을 허용험.
 	 System.out.println("Call Constructor" + this);	
 	}
 }
@@ -25,11 +25,22 @@ public class ConstantDemo {
 	
 	public static void main(String[] arg) {
 		
+		//Company a = new Company("blue"); // 에러. 열거형은 private 이므로 외부에서 생성자 호출 불가
+		
 		System.out.println("Fruit APPLE : " + Fruit.APPLE + "형태는? " +Fruit.APPLE.getClass().getName());
 		//가지고 있는 값은 APLLE 
 		System.out.println("Company APPLE : " + Company.APPLE + "형태는? : " + Company.APPLE.getClass().getName());
 	
 		//가지고 있는 값은 APLLE 
+		//enum 클래스가 가지고 있는 메서드가  있다 사용해보자.
+		//getDeclarinClass 열거형의 Class객체를 반환한다.getclass 의 getName 과 같다.
+		System.out.println("getDeclarinClass : " + Company.APPLE.getDeclaringClass());
+		// name 열거형 상수의 이름을 반환한다.
+		System.out.println("String Name : " + Company.APPLE.name());
+		// ordinal() 열거형 상수가 정의된 순서를 반환한다.
+		System.out.println("int ordinal : " +Company.COOGLE.ordinal());
+		// T valueOf(Class<T> enumType, String name) 지정된 열거형에서 name과 일치한ㄴ 상수를 반환
+		System.out.println("valueOf : " + Company.valueOf("APPLE"));
 		
 		if(Fruit.APPLE.toString().equals(Company.APPLE.toString())) {
 			System.out.println("둘이 가지고 있는 값이 같다.");
