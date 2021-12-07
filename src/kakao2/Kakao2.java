@@ -37,7 +37,7 @@ public class Kakao2 {
 				num = cur - '0';
 				if(num == 1 && Character.getNumericValue(first.charAt(i+1)) == 0) {
 					num = 10;
-					i++;
+					i--;
 					
 				}
 			}
